@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP免费追剧神器</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 680px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 10px 14px;
+            font-size: 15px;
+            border: 1px solid #dcdfe6;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #409eff;
+        }
+        .btn {
+            padding: 10px 16px;
+            font-size: 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-clear {
+            background-color: #909399;
+            color: white;
+        }
+        .btn-clear:hover { background-color: #73767a; }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .btn-platform {
+            background-color: #409eff;
+            color: white;
+        }
+        .btn-platform:hover { background-color: #66b1ff; }
+
+        .btn-play {
+            background-color: #67c23a;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-play:hover { background-color: #85ce61; }
+
+        .player-container {
+            margin-top: 15px;
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .reminder {
+            margin-top: 25px;
+            text-align: center;
+            color: #f56c6c;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        @media (max-width: 500px) {
+            .btn-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .player-container {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>VIP免费追剧神器</h2>
+    
+    <div class="input-group">
+        <input type="text" id="videoUrl" placeholder="输入视频网址: ">
+        <button class="btn btn-clear" onclick="empty()">清空</button>
+    </div>
+
+    <div class="btn-grid">
+        <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
+        <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
+        <button class="btn btn-platform" onclick="openYq()">优酷视频</button>
+        <button class="btn btn-play" onclick="playVideo()">播放VIP视频</button>
+    </div>
+
+    <div class="player-container" id="playerBox">
+        <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+    </div>
+
+    <div class="reminder">
+        提示：本案例仅供学习使用，不可作为他用。
+    </div>
+</div>
+
+<script>
+    function empty() {
+        document.getElementById('videoUrl').value = '';
+        var playerBox = document.getElementById('playerBox');
+        playerBox.style.display = 'none';
+        document.getElementById('videoPlayer').src = '';
+    }
+
+    function openIqy() {
+        window.open('https://www.iqiyi.com', '_blank');
+    }
+
+    function openTx() {
+        window.open('https://v.qq.com', '_blank');
+    }
+
+    function openYq() {
+        window.open('https://www.youku.com/', '_blank');
+    }
+
+    function playVideo() {
+        var video = document.getElementById('videoUrl').value.trim();
+        if (!video) {
+            alert('请先粘贴视频网址！');
+            return;
+        }
+        
+        var parseUrl = 'https://jx.xmflv.cc/?url=' + encodeURIComponent(video);
+
+        var playerBox = document.getElementById('playerBox');
+        var player = document.getElementById('videoPlayer');
+        player.src = parseUrl;
+        playerBox.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
