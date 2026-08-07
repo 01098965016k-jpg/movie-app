@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP追剧神器 - 尊享超清蓝光版</title>
+    <title>VIP免费追剧神器 - 超清尊享版</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #fafbfc;
+            background-color: #f4f6f8;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,54 +22,75 @@
         .card {
             background: #ffffff;
             width: 100%;
-            max-width: 500px;
-            padding: 35px 30px;
-            border-radius: 16px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-            text-align: center;
+            max-width: 680px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
         h2 {
+            text-align: center;
             margin-bottom: 25px;
-            color: #1a1a1a;
-            font-weight: 700;
-            font-size: 22px;
+            color: #333;
         }
-        .input-wrapper {
+        .input-group {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
         }
-        .input-wrapper input {
-            width: 100%;
-            padding: 14px 18px;
+        .input-group input {
+            flex: 1;
+            padding: 12px 14px;
             font-size: 15px;
-            border: 2px solid #e1e4e8;
-            border-radius: 10px;
+            border: 1px solid #dcdfe6;
+            border-radius: 6px;
             outline: none;
-            transition: all 0.2s;
+            transition: border-color 0.2s;
         }
-        .input-wrapper input:focus {
-            border-color: #67c23a;
-            box-shadow: 0 0 0 3px rgba(103, 194, 58, 0.15);
+        .input-group input:focus {
+            border-color: #409eff;
         }
-        .btn-play {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 700;
-            background-color: #67c23a;
-            color: white;
+        .btn {
+            padding: 12px 16px;
+            font-size: 14px;
             border: none;
-            border-radius: 10px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
+        }
+        .btn-clear {
+            background-color: #909399;
+            color: white;
+        }
+        .btn-clear:hover { background-color: #73767a; }
+
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-bottom: 20px;
         }
-        .btn-play:active {
-            background-color: #5daf34;
-            transform: scale(0.98);
+        .btn-platform {
+            background-color: #409eff;
+            color: white;
+            font-size: 15px;
         }
+        .btn-platform:hover { background-color: #66b1ff; }
+
+        .btn-play {
+            background-color: #67c23a;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            grid-column: span 2;
+            padding: 14px;
+        }
+        .btn-play:hover { background-color: #85ce61; }
+
         .reminder {
-            font-size: 13px;
+            margin-top: 20px;
+            text-align: center;
             color: #909399;
+            font-size: 13px;
             line-height: 1.6;
         }
     </style>
@@ -77,31 +98,53 @@
 <body>
 
 <div class="card">
-    <h2>VIP 追剧神器 (尊享超清/蓝光)</h2>
+    <h2>VIP免费追剧神器</h2>
     
-    <div class="input-wrapper">
-        <input type="text" id="videoUrl" placeholder="粘贴视频网址 (优酷、腾讯、爱奇艺等)">
+    <!-- 输入框与清空按钮 -->
+    <div class="input-group">
+        <input type="text" id="videoUrl" placeholder="粘贴视频网址到这里: ">
+        <button class="btn btn-clear" onclick="empty()">清空</button>
     </div>
 
-    <button class="btn-play" onclick="playVideo()">▶ 立即播放 (超清/蓝光源)</button>
+    <!-- 平台快捷按钮与播放按钮 -->
+    <div class="btn-grid">
+        <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
+        <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
+        <button class="btn btn-platform" onclick="openYq()">优酷视频</button>
+        <button class="btn btn-play" onclick="playVideo()">▶ 立即播放 VIP 视频 (超清)</button>
+    </div>
 
     <div class="reminder">
-        ✨ 已为你固定启用<b>全网超清/蓝光专线</b>，支持自动选集与下一集。
+        ✨ 后台已为你锁定<b>超清专线</b>，无杂乱选项，支持自动选集与下一集。
     </div>
 </div>
 
 <script>
+    function empty() {
+        document.getElementById('videoUrl').value = '';
+    }
+
+    function openIqy() {
+        window.open('https://www.iqiyi.com', '_blank');
+    }
+
+    function openTx() {
+        window.open('https://v.qq.com', '_blank');
+    }
+
+    function openYq() {
+        window.open('https://www.youku.com/', '_blank');
+    }
+
     function playVideo() {
-        var videoInput = document.getElementById('videoUrl').value.trim();
-        if (!videoInput) {
+        var video = document.getElementById('videoUrl').value.trim();
+        if (!video) {
             alert('请先粘贴视频网址！');
             return;
         }
         
         // 专攻超清/蓝光画质接口
-        var ultraHdApi = 'https://jx.quankan.app/jiexi/?url=';
-        var parseUrl = ultraHdApi + encodeURIComponent(videoInput);
-        
+        var parseUrl = 'https://jx.xmflv.cc/?url=' + encodeURIComponent(video);
         window.open(parseUrl, '_blank');
     }
 </script>
