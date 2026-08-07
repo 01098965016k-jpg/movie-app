@@ -35,7 +35,7 @@
         .input-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .input-group input {
             flex: 1;
@@ -48,6 +48,23 @@
         }
         .input-group input:focus {
             border-color: #409eff;
+        }
+        .line-select {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #606266;
+        }
+        .line-select select {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #dcdfe6;
+            outline: none;
+            font-size: 14px;
+            background-color: #fff;
         }
         .btn {
             padding: 10px 16px;
@@ -97,11 +114,24 @@
 <div class="card">
     <h2>VIP免费追剧神器</h2>
     
+    <!-- 输入框区域 -->
     <div class="input-group">
         <input type="text" id="videoUrl" placeholder="粘贴视频网址到这里: ">
         <button class="btn btn-clear" onclick="empty()">清空</button>
     </div>
 
+    <!-- 线路选择区域 -->
+    <div class="line-select">
+        <label for="parseLine"><b>选择解析线路：</b></label>
+        <select id="parseLine">
+            <option value="https://jx.xmflv.cc/?url=" selected>线路一【XM高清主线】</option>
+            <option value="https://jx.playerjy.com/?url=">线路二【JY超清备用】</option>
+            <option value="https://jx.jsonplayer.com/player/?url=">线路三【JSON极速】</option>
+            <option value="https://jx.quankan.app/jiexi/?url=">线路四【全看蓝光】</option>
+        </select>
+    </div>
+
+    <!-- 平台与播放按钮 -->
     <div class="btn-grid">
         <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
         <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
@@ -110,7 +140,7 @@
     </div>
 
     <div class="reminder">
-        提示：本案例仅供学习使用，不可作为他用。
+        提示：如果画质不佳或播放卡顿，请在上方切换“解析线路”重新播放！
     </div>
 </div>
 
@@ -138,8 +168,10 @@
             return;
         }
         
-        // 直接在新标签页中打开解析链接，绕过 iframe 拦截
-        var parseUrl = 'https://jx.xmflv.cc/?url=' + encodeURIComponent(video);
+        // 获取选中的解析接口线路
+        var api = document.getElementById('parseLine').value;
+        var parseUrl = api + encodeURIComponent(video);
+        
         window.open(parseUrl, '_blank');
     }
 </script>
