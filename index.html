@@ -23,7 +23,7 @@
             background: #ffffff;
             width: 100%;
             max-width: 500px;
-            padding: 30px;
+            padding: 35px 30px;
             border-radius: 16px;
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
             text-align: center;
@@ -32,28 +32,27 @@
             margin-bottom: 25px;
             color: #1a1a1a;
             font-weight: 700;
+            font-size: 22px;
         }
         .input-wrapper {
             margin-bottom: 20px;
-            position: relative;
         }
         .input-wrapper input {
             width: 100%;
-            padding: 16px 20px;
-            font-size: 16px;
+            padding: 14px 18px;
+            font-size: 15px;
             border: 2px solid #e1e4e8;
             border-radius: 10px;
             outline: none;
             transition: all 0.2s;
-            -webkit-appearance: none;
         }
         .input-wrapper input:focus {
-            border-color: #409eff;
-            box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.1);
+            border-color: #67c23a;
+            box-shadow: 0 0 0 3px rgba(103, 194, 58, 0.15);
         }
         .btn-play {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             font-size: 16px;
             font-weight: 700;
             background-color: #67c23a;
@@ -63,39 +62,31 @@
             cursor: pointer;
             transition: all 0.2s;
             margin-bottom: 20px;
-            -webkit-appearance: none;
         }
         .btn-play:active {
             background-color: #5daf34;
             transform: scale(0.98);
         }
-        .platform-tips {
-            margin-top: 10px;
+        .reminder {
             font-size: 13px;
-            color: #606266;
+            color: #909399;
             line-height: 1.6;
-        }
-        .platform-tips b {
-            color: #409eff;
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>VIP 超清/蓝光追剧</h2>
+    <h2>VIP 追剧神器 (尊享超清/蓝光)</h2>
     
     <div class="input-wrapper">
-        <input type="text" id="videoUrl" placeholder="粘贴视频网址 (尊享超清蓝光资源)">
+        <input type="text" id="videoUrl" placeholder="粘贴视频网址 (优酷、腾讯、爱奇艺等)">
     </div>
 
-    <button class="btn-play" onclick="playVideo()">▶ 立即免费播放 (超清)</button>
+    <button class="btn-play" onclick="playVideo()">▶ 立即播放 (超清/蓝光源)</button>
 
-    <div class="platform-tips">
-        💡 <b>尊享追剧小贴士：</b><br>
-        1. 粘贴链接后，点击按钮跳转至 <b>超清/蓝光专用线路</b>。<br>
-        2. 默认输出最高清晰度（视资源而定），专享视听盛宴。<br>
-        3. 如遇卡顿，建议检查网络环境。
+    <div class="reminder">
+        ✨ 已为你固定启用<b>全网超清/蓝光专线</b>，支持自动选集与下一集。
     </div>
 </div>
 
@@ -107,11 +98,10 @@
             return;
         }
         
-        // 更换为更稳定的 OK 解析接口，该接口通常默认提供最高清晰度资源
-        var specializedApi = 'https://okjx.cc/?url=';
-        var parseUrl = specializedApi + encodeURIComponent(videoInput);
+        // 专攻超清/蓝光画质接口
+        var ultraHdApi = 'https://jx.quankan.app/jiexi/?url=';
+        var parseUrl = ultraHdApi + encodeURIComponent(videoInput);
         
-        // 跳转到新页面播放，确保 mobile Safari 的播放稳定性
         window.open(parseUrl, '_blank');
     }
 </script>
