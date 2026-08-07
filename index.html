@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP免费追剧神器</title>
+    <title>VIP追剧神器 - 尊享超清蓝光版</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,7 +12,7 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f6f8;
+            background-color: #fafbfc;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,154 +22,96 @@
         .card {
             background: #ffffff;
             width: 100%;
-            max-width: 680px;
+            max-width: 500px;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            text-align: center;
         }
         h2 {
-            text-align: center;
             margin-bottom: 25px;
-            color: #333;
+            color: #1a1a1a;
+            font-weight: 700;
         }
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .input-group input {
-            flex: 1;
-            padding: 10px 14px;
-            font-size: 15px;
-            border: 1px solid #dcdfe6;
-            border-radius: 6px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .input-group input:focus {
-            border-color: #409eff;
-        }
-        .line-select {
+        .input-wrapper {
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: #606266;
+            position: relative;
         }
-        .line-select select {
-            flex: 1;
-            padding: 8px 12px;
-            border-radius: 6px;
-            border: 1px solid #dcdfe6;
+        .input-wrapper input {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid #e1e4e8;
+            border-radius: 10px;
             outline: none;
-            font-size: 14px;
-            background-color: #fff;
-        }
-        .btn {
-            padding: 10px 16px;
-            font-size: 14px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
             transition: all 0.2s;
+            -webkit-appearance: none;
         }
-        .btn-clear {
-            background-color: #909399;
-            color: white;
+        .input-wrapper input:focus {
+            border-color: #409eff;
+            box-shadow: 0 0 0 3px rgba(64, 158, 255, 0.1);
         }
-        .btn-clear:hover { background-color: #73767a; }
-
-        .btn-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .btn-platform {
-            background-color: #409eff;
-            color: white;
-        }
-        .btn-platform:hover { background-color: #66b1ff; }
-
         .btn-play {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
             background-color: #67c23a;
             color: white;
-            font-weight: bold;
-            grid-column: span 2;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 20px;
+            -webkit-appearance: none;
         }
-        .btn-play:hover { background-color: #85ce61; }
-
-        .reminder {
-            margin-top: 25px;
-            text-align: center;
-            color: #909399;
-            font-size: 14px;
+        .btn-play:active {
+            background-color: #5daf34;
+            transform: scale(0.98);
+        }
+        .platform-tips {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #606266;
+            line-height: 1.6;
+        }
+        .platform-tips b {
+            color: #409eff;
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>VIP免费追剧神器</h2>
+    <h2>VIP 超清/蓝光追剧</h2>
     
-    <!-- 输入框区域 -->
-    <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="粘贴视频网址到这里: ">
-        <button class="btn btn-clear" onclick="empty()">清空</button>
+    <div class="input-wrapper">
+        <input type="text" id="videoUrl" placeholder="粘贴视频网址 (尊享超清蓝光资源)">
     </div>
 
-    <!-- 线路选择区域 -->
-    <div class="line-select">
-        <label for="parseLine"><b>选择解析线路：</b></label>
-        <select id="parseLine">
-            <option value="https://jx.xmflv.cc/?url=" selected>线路一【XM高清 - 默认推荐】</option>
-            <option value="https://jx.quankan.app/jiexi/?url=">线路二【全看蓝光】</option>
-            <option value="https://jx.jsonplayer.com/player/?url=">线路三【JSON极速】</option>
-            <option value="https://im1907.top/?jx=">线路四【M1907通用】</option>
-        </select>
-    </div>
+    <button class="btn-play" onclick="playVideo()">▶ 立即免费播放 (超清)</button>
 
-    <!-- 平台与播放按钮 -->
-    <div class="btn-grid">
-        <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
-        <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
-        <button class="btn btn-platform" onclick="openYq()">优酷视频</button>
-        <button class="btn btn-play" onclick="playVideo()">▶ 立即播放 VIP 视频</button>
-    </div>
-
-    <div class="reminder">
-        💡 提示：默认使用【线路一】即可。如果遇到个别视频打不开，切换线路二或三尝试。
+    <div class="platform-tips">
+        💡 <b>尊享追剧小贴士：</b><br>
+        1. 粘贴链接后，点击按钮跳转至 <b>超清/蓝光专用线路</b>。<br>
+        2. 默认输出最高清晰度（视资源而定），专享视听盛宴。<br>
+        3. 如遇卡顿，建议检查网络环境。
     </div>
 </div>
 
 <script>
-    function empty() {
-        document.getElementById('videoUrl').value = '';
-    }
-
-    function openIqy() {
-        window.open('https://www.iqiyi.com', '_blank');
-    }
-
-    function openTx() {
-        window.open('https://v.qq.com', '_blank');
-    }
-
-    function openYq() {
-        window.open('https://www.youku.com/', '_blank');
-    }
-
     function playVideo() {
-        var video = document.getElementById('videoUrl').value.trim();
-        if (!video) {
+        var videoInput = document.getElementById('videoUrl').value.trim();
+        if (!videoInput) {
             alert('请先粘贴视频网址！');
             return;
         }
         
-        var api = document.getElementById('parseLine').value;
-        var parseUrl = api + encodeURIComponent(video);
+        // 更换为更稳定的 OK 解析接口，该接口通常默认提供最高清晰度资源
+        var specializedApi = 'https://okjx.cc/?url=';
+        var parseUrl = specializedApi + encodeURIComponent(videoInput);
         
+        // 跳转到新页面播放，确保 mobile Safari 的播放稳定性
         window.open(parseUrl, '_blank');
     }
 </script>
