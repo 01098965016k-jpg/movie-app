@@ -106,16 +106,17 @@
         <button class="btn btn-clear" onclick="empty()">清空</button>
     </div>
 
-    <!-- 平台快捷按钮与播放按钮 -->
+    <!-- 平台快捷按钮（爱优腾芒）与播放按钮 -->
     <div class="btn-grid">
         <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
         <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
         <button class="btn btn-platform" onclick="openYq()">优酷视频</button>
+        <button class="btn btn-platform" onclick="openMg()">芒果 TV</button>
         <button class="btn btn-play" onclick="playVideo()">▶ 立即播放 VIP 视频 (超清)</button>
     </div>
 
     <div class="reminder">
-        ✨ 后台已为你锁定<b>超清专线</b>，无杂乱选项，支持自动选集与下一集。
+        ✨ 支持爱奇艺、腾讯、优酷、芒果等全网平台，后台已锁定<b>超清专线</b>。
     </div>
 </div>
 
@@ -134,6 +135,10 @@
 
     function openYq() {
         window.open('https://www.youku.com/', '_blank');
+    }
+
+    function openMg() {
+        window.open('https://www.mgtv.com/', '_blank');
     }
 
     function playVideo() {
