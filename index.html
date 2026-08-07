@@ -103,9 +103,8 @@
         .reminder {
             margin-top: 25px;
             text-align: center;
-            color: #f56c6c;
-            font-weight: bold;
-            font-size: 15px;
+            color: #909399;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -124,10 +123,10 @@
     <div class="line-select">
         <label for="parseLine"><b>选择解析线路：</b></label>
         <select id="parseLine">
-            <option value="https://jx.xmflv.cc/?url=" selected>线路一【XM高清主线】</option>
-            <option value="https://jx.playerjy.com/?url=">线路二【JY超清备用】</option>
+            <option value="https://jx.xmflv.cc/?url=" selected>线路一【XM高清 - 默认推荐】</option>
+            <option value="https://jx.quankan.app/jiexi/?url=">线路二【全看蓝光】</option>
             <option value="https://jx.jsonplayer.com/player/?url=">线路三【JSON极速】</option>
-            <option value="https://jx.quankan.app/jiexi/?url=">线路四【全看蓝光】</option>
+            <option value="https://im1907.top/?jx=">线路四【M1907通用】</option>
         </select>
     </div>
 
@@ -140,7 +139,7 @@
     </div>
 
     <div class="reminder">
-        提示：如果画质不佳或播放卡顿，请在上方切换“解析线路”重新播放！
+        💡 提示：默认使用【线路一】即可。如果遇到个别视频打不开，切换线路二或三尝试。
     </div>
 </div>
 
@@ -168,7 +167,6 @@
             return;
         }
         
-        // 获取选中的解析接口线路
         var api = document.getElementById('parseLine').value;
         var parseUrl = api + encodeURIComponent(video);
         
