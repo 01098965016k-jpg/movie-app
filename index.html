@@ -102,11 +102,11 @@
     
     <!-- 输入框与清空按钮 -->
     <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="粘贴视频网址到这里: ">
+        <input type="text" id="videoUrl" placeholder="粘贴App分享链接或视频网址: ">
         <button class="btn btn-clear" onclick="empty()">清空</button>
     </div>
 
-    <!-- 平台快捷按钮（爱优腾芒）与播放按钮 -->
+    <!-- 平台快捷按钮与播放按钮 -->
     <div class="btn-grid">
         <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
         <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
@@ -116,7 +116,7 @@
     </div>
 
     <div class="reminder">
-        ✨ 支持爱奇艺、腾讯、优酷、芒果等全网平台，后台已锁定<b>超清专线</b>。
+        ✨ 已经开启<b>手机端智能防错过滤</b>，可直接粘贴 App 分享的全套文本。
     </div>
 </div>
 
@@ -125,31 +125,33 @@
         document.getElementById('videoUrl').value = '';
     }
 
-    function openIqy() {
-        window.open('https://www.iqiyi.com', '_blank');
-    }
-
-    function openTx() {
-        window.open('https://v.qq.com', '_blank');
-    }
-
-    function openYq() {
-        window.open('https://www.youku.com/', '_blank');
-    }
-
-    function openMg() {
-        window.open('https://www.mgtv.com/', '_blank');
-    }
+    function openIqy() { window.open('https://www.iqiyi.com', '_blank'); }
+    function openTx() { window.open('https://v.qq.com', '_blank'); }
+    function openYq() { window.open('https://www.youku.com/', '_blank'); }
+    function openMg() { window.open('https://www.mgtv.com/', '_blank'); }
 
     function playVideo() {
-        var video = document.getElementById('videoUrl').value.trim();
-        if (!video) {
+        var rawInput = document.getElementById('videoUrl').value.trim();
+        if (!rawInput) {
             alert('请先粘贴视频网址！');
             return;
         }
+
+        // 1. 自动过滤掉 App 复制文本中的中文和杂质，只提取标准网址
+        var urlMatch = rawInput.match(/https?:\/\/[^\s]+/);
+        if (!urlMatch) {
+            alert('未识别到有效网址，请重新复制粘贴！');
+            return;
+        }
+        var cleanUrl = urlMatch[0];
+
+        // 2. 自动将移动端 m. 网址替换为电脑端标准网址，防止接口报错
+        cleanUrl = cleanUrl.replace('//m.youku.com', '//v.youku.com')
+                           .replace('//m.iqiyi.com', '//www.iqiyi.com')
+                           .replace('//m.mgtv.com', '//www.mgtv.com')
+                           .replace('//m.v.qq.com', '//v.qq.com');
         
-        // 专攻超清/蓝光画质接口
-        var parseUrl = 'https://jx.xmflv.cc/?url=' + encodeURIComponent(video);
+        var parseUrl = 'https://jx.xmflv.cc/?url=' + encodeURIComponent(cleanUrl);
         window.open(parseUrl, '_blank');
     }
 </script>
