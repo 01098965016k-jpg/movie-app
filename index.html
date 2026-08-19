@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP免费追剧神器 - 超清尊享版</title>
+    <title>VIP免费追剧神器</title>
     <style>
         * {
             box-sizing: border-box;
@@ -23,14 +23,16 @@
             background: #ffffff;
             width: 100%;
             max-width: 680px;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
         h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: #333;
+            color: #2c3e50;
+            font-size: 26px;
+            letter-spacing: 1px;
         }
         .input-group {
             display: flex;
@@ -39,10 +41,10 @@
         }
         .input-group input {
             flex: 1;
-            padding: 12px 14px;
+            padding: 14px 16px;
             font-size: 15px;
             border: 1px solid #dcdfe6;
-            border-radius: 6px;
+            border-radius: 8px;
             outline: none;
             transition: border-color 0.2s;
         }
@@ -50,10 +52,10 @@
             border-color: #409eff;
         }
         .btn {
-            padding: 12px 16px;
-            font-size: 14px;
+            padding: 14px 20px;
+            font-size: 15px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -66,28 +68,56 @@
         .btn-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         .btn-platform {
             background-color: #409eff;
             color: white;
-            font-size: 15px;
+            font-size: 16px;
+            padding: 14px;
         }
         .btn-platform:hover { background-color: #66b1ff; }
 
+        .line-select-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .line-select-wrapper label {
+            font-size: 14px;
+            color: #606266;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .line-select-wrapper select {
+            flex: 1;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #dcdfe6;
+            border-radius: 8px;
+            background-color: #fff;
+            outline: none;
+            cursor: pointer;
+        }
+
         .btn-play {
+            width: 100%;
             background-color: #67c23a;
             color: white;
             font-weight: bold;
-            font-size: 16px;
-            grid-column: span 2;
-            padding: 14px;
+            font-size: 18px;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
         .btn-play:hover { background-color: #85ce61; }
 
         .reminder {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
             color: #909399;
             font-size: 13px;
@@ -100,23 +130,32 @@
 <div class="card">
     <h2>VIP免费追剧神器</h2>
     
-    <!-- 输入框与清空按钮 -->
     <div class="input-group">
-        <input type="text" id="videoUrl" placeholder="粘贴视频网址到这里: ">
+        <input type="text" id="videoUrl" placeholder="粘贴视频网址到这里:">
         <button class="btn btn-clear" onclick="empty()">清空</button>
     </div>
 
-    <!-- 平台快捷按钮（爱优腾芒）与播放按钮 -->
     <div class="btn-grid">
         <button class="btn btn-platform" onclick="openIqy()">爱奇艺</button>
         <button class="btn btn-platform" onclick="openTx()">腾讯视频</button>
         <button class="btn btn-platform" onclick="openYq()">优酷视频</button>
         <button class="btn btn-platform" onclick="openMg()">芒果 TV</button>
-        <button class="btn btn-play" onclick="playVideo()">▶ 立即播放 VIP 视频 (超清)</button>
     </div>
 
+    <div class="line-select-wrapper">
+        <label>解析线路：</label>
+        <select id="apiSelect">
+            <option value="https://jx.playerjy.com/?url=">线路 1 (JY纯净专线 - 推荐)</option>
+            <option value="https://jx.jsonplayer.com/player/?url=">线路 2 (JSON全能线)</option>
+            <option value="https://jx.aidouer.net/?url=">线路 3 (爱豆极速线)</option>
+            <option value="https://jx.quankan.app/jiexi/?url=">线路 4 (全看备用线)</option>
+        </select>
+    </div>
+
+    <button class="btn-play" onclick="playVideo()">▶ 立即播放 VIP 视频 (超清)</button>
+
     <div class="reminder">
-        ✨ 支持爱奇艺、腾讯、优酷、芒果等全网平台，后台已锁定<b>超清专线</b>。
+        ✨ 支持爱奇艺、腾讯、优酷、芒果等全网平台，后台已锁定超清专线。
     </div>
 </div>
 
@@ -125,32 +164,54 @@
         document.getElementById('videoUrl').value = '';
     }
 
-    function openIqy() {
-        window.open('https://www.iqiyi.com', '_blank');
-    }
+    function openIqy() { window.open('https://www.iqiyi.com', '_blank'); }
+    function openTx() { window.open('https://v.qq.com', '_blank'); }
+    function openYq() { window.open('https://www.youku.com/', '_blank'); }
+    function openMg() { window.open('https://www.mgtv.com/', '_blank'); }
 
-    function openTx() {
-        window.open('https://v.qq.com', '_blank');
-    }
+    // 简单安全的链接清洗逻辑（不误删任何参数）
+    function getCleanUrl(raw) {
+        if (!raw) return '';
+        
+        // 1. 从粘贴内容中抓取 http:// 或 https:// 开头的网址
+        var match = raw.match(/https?:\/\/[^\s"'<>]+/i);
+        if (!match) return '';
+        var url = match[0];
 
-    function openYq() {
-        window.open('https://www.youku.com/', '_blank');
-    }
+        // 2. 如果包含腾讯视频 vid 手机分享链，快速提取 vid
+        if (url.indexOf('v.qq.com') !== -1 && url.indexOf('vid=') !== -1) {
+            var vidMatch = url.match(/vid=([a-zA-Z0-9_]+)/);
+            if (vidMatch) {
+                return 'https://v.qq.com/x/page/' + vidMatch[1] + '.html';
+            }
+        }
 
-    function openMg() {
-        window.open('https://www.mgtv.com/', '_blank');
+        // 3. 基础手机端域名替换为 PC 端，不改动后续路径
+        url = url.replace('//m.v.qq.com', '//v.qq.com');
+        url = url.replace('//m.mgtv.com', '//www.mgtv.com');
+        url = url.replace('//m.youku.com', '//v.youku.com');
+        url = url.replace('//m.iqiyi.com', '//www.iqiyi.com');
+
+        return url;
     }
 
     function playVideo() {
-        var video = document.getElementById('videoUrl').value.trim();
-        if (!video) {
+        var rawInput = document.getElementById('videoUrl').value.trim();
+        if (!rawInput) {
             alert('请先粘贴视频网址！');
             return;
         }
+
+        var targetUrl = getCleanUrl(rawInput);
+        if (!targetUrl) {
+            alert('未识别到有效网址，请重新复制粘贴！');
+            return;
+        }
+
+        var api = document.getElementById('apiSelect').value;
         
-        // 专攻超清/蓝光画质接口
-        var parseUrl = 'https://jx.xmflv.cc/?url=' + encodeURIComponent(video);
-        window.open(parseUrl, '_blank');
+        // 直接拼接 URL 打开，防止编码二次转义导致解析失效
+        window.open(api + targetUrl, '_blank');
     }
 </script>
 
